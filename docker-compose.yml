@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  mongodb: 
+    image: mongo
+    container_name: mongo-ecomm
+    environment: 
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - db-mongo-ecomm
+    networks:
+      - alura
+    ports: 
+      - 27017:27017
+
+  ecomm: 
+    image: pecorario/ecomm:1.0
+    container_name: ecomm
+    networks:
+      - alura
+    depends_on:
+      - mongodb
+
+networks:
+  alura:
+    driver: bridge
