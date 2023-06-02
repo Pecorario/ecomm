@@ -8,6 +8,9 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret
     volumes:
       - db-mongo-ecomm
+      - type: bind
+        source: ./mongo
+        target: /mongo-scripts
     networks:
       - alura
     ports: 
