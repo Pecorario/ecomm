@@ -7,12 +7,13 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=secret
     volumes:
-      - db-mongo-ecomm
+      - db-mongo-ecomm:/data/db
       - type: bind
         source: ./mongo
         target: /mongo-scripts
     networks:
       - alura
+    restart: always
     ports: 
       - 27017:27017
 
@@ -27,3 +28,6 @@ services:
 networks:
   alura:
     driver: bridge
+
+volumes:
+  db-mongo-ecomm:
