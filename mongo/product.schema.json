@@ -1,0 +1,43 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "additionalProperties": false,
+    "required": [ "_id", "nome", "descricao", "slug", "estoque", "preco", "categoria" ],
+    "properties": {
+      "_id": {
+        "bsonType": "objectId",
+        "description": "Deve ser um ObjectId"
+      },
+      "nome": { 
+        "bsonType": "string",
+        "minLength": 5,
+        "description": "Deve ser uma string e conter pelo menos 5 caracteres"
+      },
+      "descricao": {
+        "bsonType": "string",
+        "minLength": 10,
+        "description": "Deve ser uma string e conter pelo menos 10 caracteres"
+      },
+      "slug": { 
+        "bsonType": "string",
+        "minLength": 5,
+        "description": "Deve ser uma string e conter pelo menos 5 caracteres"
+      },
+      "estoque": { 
+        "bsonType": "int",
+        "minimum": 0,
+        "description": "Deve ser um número inteiro igual ou maior que 0"
+      },
+      "preco": { 
+        "bsonType": "decimal",
+        "minimum": 0,
+        "description": "Deve ser um número decimal igual ou maior que 0"
+      },
+      "categoria": {
+        "bsonType": "string",
+        "enum": ["AUTOMOTIVA", "CELULARES", "INFORMÁTICA", "LIVROS", "MÓVEIS"],
+        "description": "Digite uma categoria válida"
+      }
+    }
+  }
+}
