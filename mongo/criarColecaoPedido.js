@@ -1,47 +1,36 @@
 use("ecomm");
 
-const result = db.createCollection("accounts", {
+const result = db.createCollection("orders", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
       additionalProperties: false,
-      required: ["nome", "email", "senha", "dataCriacao", "cpf", "telefone", "endereco"],
+      required: ["dataPedido", "account", "enderecoEntrega", "itens"],
       properties: {
         _id: {
           bsonType: "objectId",
           description: "Deve ser um ObjectId"
         },
-        nome: {
-          bsonType: "string",
-          minLength: 5,
-          description: "Deve ser uma string e conter pelo menos 5 caracteres"
-        },
-        email: {
-          bsonType: "string",
-          minLength: 5,
-          description: "Deve ser uma string e conter pelo menos 5 caracteres"
-        },
-        senha: {
-          bsonType: "string",
-          minLength: 5,
-          description: "Deve ser uma string e conter pelo menos 5 caracteres"
-        },
-        dataCriacao: {
+        dataPedido: {
           bsonType: "date",
           description: "Deve ser uma data válida"
         },
-        cpf: {
-          bsonType: "string",
-          minLength: 11,
-          maxLength: 11,
-          description: "Deve conter apenas os números"
+        account: {
+          bsonType: "object",
+          required: ["accountId", "nome"],
+          properties: {
+            accountId: {
+              bsonType: "objectId",
+              description: "Deve ser um ObjectId"
+            },
+            nome: {
+              bsonType: "string",
+              minLength: 5,
+              description: "Deve ser uma string e conter pelo menos 5 caracteres"
+            },
+          }
         },
-        telefone: {
-          bsonType: "string",
-          minLength: 10,
-          description: "Deve ser um telefone válido"
-        },
-        endereco: {
+        enderecoEntrega: {
           bsonType: "object",
           additionalProperties: false,
           required: ["bairro", "rua", "numero", "cep", "cidade", "uf"],
@@ -81,6 +70,39 @@ const result = db.createCollection("accounts", {
             complemento: {
               bsonType: "string",
               description: "Deve ser uma string válida"
+            }
+          }
+        },
+        itens: {
+          bsonType: "array",
+          additionalProperties: false,
+          items: {
+            bsonType: "object",
+            additionalProperties: false,
+            description: "Insira corretamente os itens",
+            required: ["productId", "quantidade", "precoUnitario"],
+            properties: {
+              productId: {
+                bsonType: "objectId",
+                description: "Deve ser um ObjectId"
+              },
+              quantidade: {
+                bsonType: "int",
+                minimum: 1,
+                description: "Deve ser um número inteiro maior ou igual a 1"
+              },
+              desconto: {
+                bsonType: "decimal",
+                minimum: 0,
+                exclusiveMinimum: true,
+                description: "Deve ser maior que 0"
+              },
+              precoUnitario: {
+                bsonType: "decimal",
+                minimum: 0,
+                exclusiveMinimum: true,
+                description: "Deve ser maior que 0"
+              }
             }
           }
         }

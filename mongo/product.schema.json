@@ -2,13 +2,13 @@
   "$jsonSchema": {
     "bsonType": "object",
     "additionalProperties": false,
-    "required": [ "_id", "nome", "descricao", "slug", "estoque", "preco", "categoria" ],
+    "required": ["nome", "descricao", "slug", "estoque", "preco", "categoria"],
     "properties": {
       "_id": {
         "bsonType": "objectId",
         "description": "Deve ser um ObjectId"
       },
-      "nome": { 
+      "nome": {
         "bsonType": "string",
         "minLength": 5,
         "description": "Deve ser uma string e conter pelo menos 5 caracteres"
@@ -18,17 +18,17 @@
         "minLength": 10,
         "description": "Deve ser uma string e conter pelo menos 10 caracteres"
       },
-      "slug": { 
+      "slug": {
         "bsonType": "string",
         "minLength": 5,
         "description": "Deve ser uma string e conter pelo menos 5 caracteres"
       },
-      "estoque": { 
+      "estoque": {
         "bsonType": "int",
         "minimum": 0,
         "description": "Deve ser um número inteiro igual ou maior que 0"
       },
-      "preco": { 
+      "preco": {
         "bsonType": "decimal",
         "minimum": 0,
         "description": "Deve ser um número decimal igual ou maior que 0"
