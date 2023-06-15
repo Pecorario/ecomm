@@ -1,10 +1,11 @@
+import Utils from './Utils.js';
 class CategoryService {
   static async findCategories() {
     try {
       const response = await fetch('http://localhost:3000/categories');
-      console.log('response status: ', response.status)
       const json = await response.json();
-      console.log(json);
+
+      Utils.returnResponse(response, json);
     } catch (error) {
       console.log(error);
     }
@@ -12,11 +13,25 @@ class CategoryService {
 
   static async findCategoryById(id) {
     try {
-      const response = await fetch('http://localhost:3000/categories');
-      console.log('response status: ', response.status)
+      const response = await fetch(`http://localhost:3000/categories/${id}`);
       const json = await response.json();
-      const category = json.find(item => item.id == id);
-      console.log(category);
+
+      Utils.returnResponse(response, json);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async createCategory(newCategory) {
+    try {
+      const response = await fetch('http://localhost:3000/categories', {
+        method: "POST",
+        body: JSON.stringify(newCategory),
+        headers: { "Accept": "application/json", "Content-Type": "application/json" }
+      });
+      const json = await response.json();
+
+      Utils.returnResponse(response, json);
     } catch (error) {
       console.log(error);
     }
