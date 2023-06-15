@@ -36,6 +36,21 @@ class CategoryService {
       console.log(error);
     }
   }
+
+  static async updateCategory(id, data) {
+    try {
+      const response = await fetch(`http://localhost:3000/categories/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: { "Accept": "application/json", "Content-Type": "application/json" }
+      });
+      const json = await response.json();
+
+      Utils.returnResponse(response, json);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default CategoryService;
