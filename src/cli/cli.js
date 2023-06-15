@@ -21,6 +21,9 @@ async function processarComando(args) {
       const data = await Utils.readFile(args[4]);
       await CategoryService.updateCategory(args[3], data);
       break;
+    case '--excluirCategoria':
+      await CategoryService.deleteCategory(args[3]);
+      break;
     default:
       return 'comando não encontrado';
   }
