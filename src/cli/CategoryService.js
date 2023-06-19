@@ -1,4 +1,5 @@
 import Utils from './Utils.js';
+
 class CategoryService {
   static async findCategories() {
     try {
@@ -9,7 +10,7 @@ class CategoryService {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   static async findCategoryById(id) {
     try {
@@ -25,9 +26,9 @@ class CategoryService {
   static async createCategory(newCategory) {
     try {
       const response = await fetch('http://localhost:3000/categories', {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(newCategory),
-        headers: { "Accept": "application/json", "Content-Type": "application/json" }
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       });
       const json = await response.json();
 
@@ -40,9 +41,9 @@ class CategoryService {
   static async updateCategory(id, data) {
     try {
       const response = await fetch(`http://localhost:3000/categories/${id}`, {
-        method: "PUT",
+        method: 'PUT',
         body: JSON.stringify(data),
-        headers: { "Accept": "application/json", "Content-Type": "application/json" }
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       });
       const json = await response.json();
 
@@ -55,8 +56,8 @@ class CategoryService {
   static async deleteCategory(id) {
     try {
       const response = await fetch(`http://localhost:3000/categories/${id}`, {
-        method: "DELETE",
-        headers: { "Accept": "application/json", "Content-Type": "application/json" }
+        method: 'DELETE',
+        headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
       });
       const json = await response.json();
 

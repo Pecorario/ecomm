@@ -1,8 +1,8 @@
-use("ecomm");
+use('ecomm');
 
-db.categories.createIndex({ "nome": 1 });
-db.products.createIndex({ "nome": 1 });
-db.products.createIndex({ "estoque": 1 });
+db.categories.createIndex({ nome: 1 });
+db.products.createIndex({ nome: 1 });
+db.products.createIndex({ estoque: 1 });
 
 const resultProducts = db.products.getIndexes();
 const resultCategories = db.categories.getIndexes();

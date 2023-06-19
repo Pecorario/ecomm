@@ -6,7 +6,7 @@ export default class Utils {
     const json = await fs.promises.readFile(path, encoding);
 
     return JSON.parse(json);
-  };
+  }
 
   static returnResponse(response, json) {
     console.log('response status: ', response.status);

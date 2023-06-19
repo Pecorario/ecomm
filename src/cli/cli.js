@@ -1,31 +1,38 @@
-import CategoryService from "./CategoryService.js";
-import Utils from "./Utils.js";
+import CategoryService from './CategoryService.js';
+import Utils from './Utils.js';
 
 const args = process.argv;
 
-async function processarComando(args) {
-  const command = args[2];
+async function processarComando(commands) {
+  const command = commands[2];
 
   switch (command) {
-    case '--listarCategorias':
+    case '--listarCategorias': {
       await CategoryService.findCategories();
       break;
-    case '--recuperarCategoriaPorId':
+    }
+    case '--recuperarCategoriaPorId': {
       CategoryService.findCategoryById(args[3]);
       break;
-    case '--inserirCategoria':
+    }
+    case '--inserirCategoria': {
       const newCategory = await Utils.readFile(args[3]);
       await CategoryService.createCategory(newCategory);
       break;
-    case '--atualizarCategoria':
+    }
+    case '--atualizarCategoria': {
       const data = await Utils.readFile(args[4]);
       await CategoryService.updateCategory(args[3], data);
       break;
-    case '--excluirCategoria':
+    }
+    case '--excluirCategoria': {
       await CategoryService.deleteCategory(args[3]);
       break;
-    default:
-      return 'comando não encontrado';
+    }
+    default: {
+      console.log('comando não encontrado');
+      break;
+    }
   }
 }
 
