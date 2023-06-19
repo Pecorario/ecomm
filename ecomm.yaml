@@ -2,9 +2,16 @@ openapi: 3.0.3
 info:
   title: Ecomm
   version: 1.0.0
+tags:
+  - name: categories
+  - name: products
+  - name: orders
+  - name: accounts
 paths:
   /api/categories:
     get:
+      tags:
+        - categories
       description: get a list of all categories
       responses:
         200:
@@ -17,6 +24,8 @@ paths:
                   $ref: '#/components/schemas/Category'
   /api/categories/{id}:
     get:
+      tags:
+        - categories
       description: get a category by id
       parameters:
         - name: id
@@ -38,12 +47,14 @@ paths:
               example: 'Not Found'
   /api/admin/categories:
     post:
+      tags:
+        - categories
       description: create a new category
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Category'
+              $ref: '#/components/schemas/NewCategory'
       responses:
         201:
           description: Successful operation
@@ -59,6 +70,8 @@ paths:
           type: integer
         required: true
     delete:
+      tags:
+        - categories
       description: delete a category by id
       responses:
         200:
@@ -72,12 +85,14 @@ paths:
             application/json:
               example: 'Not Found'
     put:
+      tags:
+        - categories
       description: update a category by id
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Category'
+              $ref: '#/components/schemas/NewCategory'
       responses:
         201:
           description: Successful operation
@@ -91,6 +106,8 @@ paths:
             application/json:
               example: 'Not Found'
     patch:
+      tags:
+        - categories
       description: activate a category by id
       responses:
         200:
@@ -103,6 +120,104 @@ paths:
           content:
             application/json:
               example: 'Not Found'
+  /api/admin/products:
+    post:
+      tags:
+        - products
+      description: create a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProduct'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /api/products:
+    get:
+      tags:
+        - products
+      description: get a list of all products
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /api/products/{id}:
+    get:
+      tags:
+        - products
+      description: get a product by id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/products/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    delete:
+      tags:
+        - products
+      description: delete a product by id
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              example: 'Product deleted'
+        404:
+          description: Product not found
+          content:
+            application/json:
+              example: 'Not Found'
+    put:
+      tags:
+        - products
+      description: update a product by id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProduct'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: Category not found
+          content:
+            application/json:
+              example: 'Not Found'
+
 components:
   schemas:
     Category:
@@ -121,3 +236,53 @@ components:
           enum:
             - 'ATIVA'
             - 'INATIVA'
+    NewCategory:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: 'INFORMÁTICA'
+        status:
+          type: string
+          example: 'ATIVA'
+          enum:
+            - 'ATIVA'
+            - 'INATIVA'
+    NewProduct:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        estoque:
+          type: integer
+        preco:
+          type: number
+        idCategoria:
+          type: string
+          format: ObjectId
+          example: ObjectId('648cbbc7a9f51e9aed992d95')
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectId
+          example: ObjectId('648cbbc7a9f51e9aed992d95')
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        estoque:
+          type: integer
+        preco:
+          type: number
+        idCategoria:
+          type: string
+          format: ObjectId
+          example: ObjectId('648cbbc7a9f51e9aed992d95')
