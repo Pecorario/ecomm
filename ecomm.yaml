@@ -213,7 +213,104 @@ paths:
               schema:
                 $ref: '#/components/schemas/Product'
         404:
-          description: Category not found
+          description: Product not found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/accounts:
+    post:
+      tags:
+        - accounts
+      description: create a new account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAccount'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /api/accounts:
+    get:
+      tags:
+        - accounts
+      description: get a list of all accounts
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+  /api/accounts/{id}:
+    get:
+      tags:
+        - accounts
+      description: get a account by id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        404:
+          description: Account not found
+          content:
+            application/json:
+              example: 'Not Found'
+  /api/admin/accounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    delete:
+      tags:
+        - accounts
+      description: delete a account by id
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              example: 'Account deleted'
+        404:
+          description: Account not found
+          content:
+            application/json:
+              example: 'Not Found'
+    put:
+      tags:
+        - accounts
+      description: update a account by id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAccount'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        404:
+          description: Account not found
           content:
             application/json:
               example: 'Not Found'
@@ -286,3 +383,126 @@ components:
           type: string
           format: ObjectId
           example: ObjectId('648cbbc7a9f51e9aed992d95')
+    NewAccount:
+      type: object
+      properties:
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+              enum:
+                - 'AC'
+                - 'AL'
+                - 'AP'
+                - 'AM'
+                - 'BA'
+                - 'CE'
+                - 'DF'
+                - 'ES'
+                - 'GO'
+                - 'MA'
+                - 'MT'
+                - 'MS'
+                - 'MG'
+                - 'PA'
+                - 'PB'
+                - 'PR'
+                - 'PE'
+                - 'PI'
+                - 'RJ'
+                - 'RN'
+                - 'RS'
+                - 'RO'
+                - 'RR'
+                - 'SC'
+                - 'SP'
+                - 'SE'
+                - 'TO'
+            descricao:
+              type: string
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectId
+          example: ObjectId('648cbbc7a9f51e9aed992d95')
+        nome:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        dataCriacao:
+          type: string
+          format: date
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+              enum:
+                - 'AC'
+                - 'AL'
+                - 'AP'
+                - 'AM'
+                - 'BA'
+                - 'CE'
+                - 'DF'
+                - 'ES'
+                - 'GO'
+                - 'MA'
+                - 'MT'
+                - 'MS'
+                - 'MG'
+                - 'PA'
+                - 'PB'
+                - 'PR'
+                - 'PE'
+                - 'PI'
+                - 'RJ'
+                - 'RN'
+                - 'RS'
+                - 'RO'
+                - 'RR'
+                - 'SC'
+                - 'SP'
+                - 'SE'
+                - 'TO'
+            descricao:
+              type: string
