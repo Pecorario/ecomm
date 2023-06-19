@@ -314,6 +314,46 @@ paths:
           content:
             application/json:
               example: 'Not Found'
+  /api/orders:
+    post:
+      tags:
+        - orders
+      description: create a new order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewOrder'
+      responses:
+        201:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /api/orders/{id}:
+    get:
+      tags:
+        - orders
+      description: get a order by id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        404:
+          description: Order not found
+          content:
+            application/json:
+              example: 'Not Found'
 
 components:
   schemas:
@@ -506,3 +546,152 @@ components:
                 - 'TO'
             descricao:
               type: string
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectId
+          example: ObjectId('648cbbc7a9f51e9aed992d95')
+        dataPedido:
+          type: string
+          format: date
+        account:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: ObjectId
+              example: ObjectId('648cbbc7a9f51e9aed992d95')
+            nome:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+              enum:
+                - 'AC'
+                - 'AL'
+                - 'AP'
+                - 'AM'
+                - 'BA'
+                - 'CE'
+                - 'DF'
+                - 'ES'
+                - 'GO'
+                - 'MA'
+                - 'MT'
+                - 'MS'
+                - 'MG'
+                - 'PA'
+                - 'PB'
+                - 'PR'
+                - 'PE'
+                - 'PI'
+                - 'RJ'
+                - 'RN'
+                - 'RS'
+                - 'RO'
+                - 'RR'
+                - 'SC'
+                - 'SP'
+                - 'SE'
+                - 'TO'
+            descricao:
+              type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+                format: ObjectId
+                example: ObjectId('648cbbc7a9f51e9aed992d95')
+              quantidade:
+                type: integer
+              desconto:
+                type: number
+              precoUnitario:
+                type: number
+    NewOrder:
+      type: object
+      properties:
+        account:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: ObjectId
+              example: ObjectId('648cbbc7a9f51e9aed992d95')
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+              enum:
+                - 'AC'
+                - 'AL'
+                - 'AP'
+                - 'AM'
+                - 'BA'
+                - 'CE'
+                - 'DF'
+                - 'ES'
+                - 'GO'
+                - 'MA'
+                - 'MT'
+                - 'MS'
+                - 'MG'
+                - 'PA'
+                - 'PB'
+                - 'PR'
+                - 'PE'
+                - 'PI'
+                - 'RJ'
+                - 'RN'
+                - 'RS'
+                - 'RO'
+                - 'RR'
+                - 'SC'
+                - 'SP'
+                - 'SE'
+                - 'TO'
+            descricao:
+              type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+                format: ObjectId
+                example: ObjectId('648cbbc7a9f51e9aed992d95')
+              quantidade:
+                type: integer
+              desconto:
+                type: number
+              precoUnitario:
+                type: number
