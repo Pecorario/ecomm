@@ -19,8 +19,8 @@ class CategoriesController {
     }
 
     try {
-      await categories.create(body);
-      return res.status(201).json({ message: 'Categoria criada com sucesso! ' });
+      const response = await categories.create(body);
+      return res.status(201).json(response);
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
