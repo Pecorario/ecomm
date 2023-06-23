@@ -7,5 +7,7 @@ router
   .get('/api/categories', CategoriesController.getAllCategories);
 router
   .post('/api/admin/categories', CategoriesController.addNewCategory);
+router
+  .get('/api/categories/:id', CategoriesController.getCategoryById);
 
 export default router;
