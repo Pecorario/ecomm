@@ -36,6 +36,25 @@ class CategoriesController {
       return res.status(500).json({ error: error.message });
     }
   };
+
+  static updateCategoryById = async (req, res) => {
+    const { id } = req.params;
+    const body = req.body;
+
+    const regex = /^[0-9]/;
+
+    if (body.nome && regex.test(body.nome)) {
+      return res.status(422).json({ error: 'O nome não pode começar com um número' });
+    }
+
+    try {
+      await categories.findByIdAndUpdate(id, { $set: body });
+
+      return res.status(200).json({ message: 'Categoria atualizada com sucesso! ' });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
 }
 
 export default CategoriesController;

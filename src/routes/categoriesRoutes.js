@@ -9,5 +9,7 @@ router
   .post('/api/admin/categories', CategoriesController.addNewCategory);
 router
   .get('/api/categories/:id', CategoriesController.getCategoryById);
+router
+  .put('/api/admin/categories/:id', CategoriesController.updateCategoryById);
 
 export default router;
