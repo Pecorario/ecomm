@@ -8,7 +8,7 @@ const categorySchema = new mongoose.Schema(
     nome: {
       type: String,
       minLength: [4, 'O nome deve ter mais de 3 caracteres'],
-      required: true,
+      required: [true, 'O nome é obrigatório'],
     },
     status: {
       type: String,
@@ -16,6 +16,7 @@ const categorySchema = new mongoose.Schema(
       default: 'ATIVA',
     },
   },
+  { versionKey: false },
 );
 
 const categories = mongoose.model('categories', categorySchema);

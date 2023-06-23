@@ -12,9 +12,10 @@ class CategoriesController {
 
   static addNewCategory = async (req, res) => {
     const body = req.body;
+    const regex = /^[0-9]/;
 
-    if (body.nome.trim() === '') {
-      return res.status(422).json({ error: 'O nome é obrigatório' });
+    if (body.nome && regex.test(body.nome)) {
+      return res.status(422).json({ error: 'O nome não pode começar com um número' });
     }
 
     try {
