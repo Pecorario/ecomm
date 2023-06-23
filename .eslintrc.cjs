@@ -14,5 +14,6 @@ module.exports = {
     'no-console': 'off',
     'no-undef': 'off',
     'no-underscore-dangle': 'off',
+    'no-shadow': 'off',
   },
 };
