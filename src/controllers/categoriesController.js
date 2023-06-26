@@ -19,8 +19,8 @@ class CategoriesController {
     }
 
     try {
-      await categories.create(body);
-      return res.status(201).json({ message: 'Categoria criada com sucesso! ' });
+      const response = await categories.create(body);
+      return res.status(201).json(response);
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -59,7 +59,7 @@ class CategoriesController {
         return res.status(404).json({ error: 'Categoria não encontrada!' });
       }
 
-      return res.status(200).json({ message: 'Categoria atualizada com sucesso! ' });
+      return res.status(200).json({ _id: response._id, ...body });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -75,7 +75,7 @@ class CategoriesController {
         return res.status(404).json({ error: 'Categoria não encontrada!' });
       }
 
-      return res.status(200).json({ message: 'Categoria ativada com sucesso! ' });
+      return res.status(200).json({ _id: response._id, nome: response.nome, status: 'ATIVA' });
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
@@ -90,7 +90,8 @@ class CategoriesController {
       if (response === null) {
         return res.status(404).json({ error: 'Categoria não encontrada!' });
       }
-      return res.sendStatus(200);
+
+      return res.sendStatus(204);
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
