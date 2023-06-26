@@ -7,13 +7,13 @@ const categorySchema = new mongoose.Schema(
     },
     nome: {
       type: String,
-      required: true,
+      minLength: [4, 'O nome deve ter mais de 3 caracteres'],
+      required: [true, 'O nome é obrigatório'],
     },
     status: {
       type: String,
-      enum: ['ATIVO', 'INATIVO'],
-      default: 'ATIVO',
-      required: true,
+      enum: ['ATIVA', 'INATIVA'],
+      default: 'ATIVA',
     },
   },
 );
