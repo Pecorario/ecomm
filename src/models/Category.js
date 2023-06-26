@@ -16,6 +16,7 @@ const categorySchema = new mongoose.Schema(
       default: 'ATIVA',
     },
   },
+  { versionKey: false },
 );
 
 const categories = mongoose.model('categories', categorySchema);
